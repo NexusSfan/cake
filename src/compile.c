@@ -162,11 +162,11 @@ static int collect_system_include_dirs(struct json_value* dirs)
 #endif
     return 0;
 
-#elif defined(__linux__) || defined(__APPLE__)
+#elif defined(__linux__) || defined(__GNU__) || defined(__APPLE__)
 
     /* Parsed out of the platform compiler's own "-v -E" output, between
        "#include <...> search starts here:" and "End of search list.". */
-#ifdef __linux__
+#if defined(__linux__) || defined(__GNU__)
     const char* command = "echo | gcc -v -E - 2>&1";
 #else
     const char* command = "echo | clang -v -E - 2>&1";

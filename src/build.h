@@ -68,10 +68,10 @@
 #  define PLATFORM_MACOS 1
 #elif defined(__linux__)
 #  define PLATFORM_LINUX 1
+#elif defined(__GNU__)
+#  define PLATFORM_HURD 1
 #elif defined(__ANDROID__)
 #  define PLATFORM_ANDROID 1
-#elif defined(__unix__) || defined(__unix)
-#  define PLATFORM_UNIX 1
 #elif defined(__FreeBSD__)
 #  define PLATFORM_FREEBSD 1
 #elif defined(__NetBSD__)
@@ -86,6 +86,8 @@
 #  define PLATFORM_HAIKU 1
 #elif defined(__sun) && defined(__SVR4)
 #  define PLATFORM_SOLARIS 1
+#elif defined(__unix__) || defined(__unix)
+#  define PLATFORM_UNIX 1
 #else
 #  error "PLATFORM_UNKNOWN"
 #endif
@@ -163,7 +165,7 @@
     defined(PLATFORM_NETBSD)    || defined(PLATFORM_OPENBSD)   || \
     defined(PLATFORM_DRAGONFLY) || defined(PLATFORM_SOLARIS)   || \
     defined(PLATFORM_ANDROID)   || defined(PLATFORM_CYGWIN)    || \
-    defined(PLATFORM_HAIKU)
+    defined(PLATFORM_HURD)      || defined(PLATFORM_HAIKU)
 #  define API_POSIX 1
 #endif
 

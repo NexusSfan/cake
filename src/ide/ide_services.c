@@ -796,7 +796,7 @@ void ide_exe_dir(char* buf, int cap)
         snprintf(buf, (size_t)cap, "%s", real);
         return;
     }
-#else
+#elif defined(PATH_MAX)
     char path[PATH_MAX];
     ssize_t n = readlink("/proc/self/exe", path, sizeof path - 1);
     if (n > 0)
@@ -895,10 +895,11 @@ void ide_full_path(const char* path, char* buf, int cap)
         WideCharToMultiByte(CP_UTF8, 0, full, -1, buf, cap, NULL, NULL))
         return;
 #else
-    char full[PATH_MAX];
-    if (realpath(path, full))
+    char *full = realpath(path, NULL);
+    if (full)
     {
         snprintf(buf, (size_t)cap, "%s", full);
+        free(full);
         return;
     }
 #endif

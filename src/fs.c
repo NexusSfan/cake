@@ -462,7 +462,7 @@ int get_self_path(char* buffer, int maxsize)
     return r;
 }
 
-#elif defined __linux__
+#elif defined __linux__ || defined __GNU__
 
 int get_self_path(char* buffer, int maxsize)
 {
